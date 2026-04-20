@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DenimCo – Slim Fit Jeans</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="logo">Denim<span>Co</span></div>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="cart.html" class="btn-primary">Cart</a>
+    </nav>
+  </header>
+
+  <section class="product-page">
+    <div class="product-image">
+      <img src="jeans1.jpg" alt="Slim Fit Jeans">
+    </div>
+
+    <div class="product-info">
+      <h1>Slim Fit Jeans</h1>
+      <p class="price">$79</p>
+      <p class="desc">
+        A clean, modern silhouette with stretch for all‑day comfort.
+        Durable denim, premium stitching, and a perfect everyday fit.
+      </p>
+
+      <label>Size:</label>
+      <select id="size">
+        <option>28</option>
+        <option>30</option>
+        <option>32</option>
+        <option>34</option>
+        <option>36</option>
+      </select>
+
+      <button class="btn-primary" onclick="addToCart()">Add to Cart</button>
+    </div>
+  </section>
+
+  <script>
+    function addToCart() {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      const item = {
+        name: "Slim Fit Jeans",
+        price: 79,
+        size: document.getElementById("size").value,
+        img: "jeans1.jpg"
+      };
+
+      cart.push(item);
+      localStorage.setItem("cart", JSON.stringify(cart));
+
+      alert("Added to cart!");
+    }
+  </script>
+
+</body>
+</html>

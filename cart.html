@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart – DenimCo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="logo">Denim<span>Co</span></div>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+    </nav>
+  </header>
+
+  <section class="cart">
+    <h1>Your Shopping Cart</h1>
+    <div id="cart-items"></div>
+    <h2 id="total"></h2>
+  </section>
+
+  <script>
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartContainer = document.getElementById("cart-items");
+    let total = 0;
+
+    if (cart.length === 0) {
+      cartContainer.innerHTML = "<p>Your cart is empty.</p>";
+    } else {
+      cart.forEach((item, index) => {
+        total += item.price;
+
+        cartContainer.innerHTML += `
+          <div class="cart-item">
+            <img src="${item.img}" alt="${item.name}">
+            <div>
+              <h3>${item.name}</h3>
+              <p>Size: ${item.size}</p>
+              <p>$${item.price}</p>
+              <button onclick="removeItem(${index})">Remove</button>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    document.getElementById("total").innerText = "Total: $" + total;
+
+    function removeItem(index) {
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      location.reload();
+    }
+  </script>
+
+</body>
+</html>
